@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build && next export",
-    "start": "npx serve@latest out",
+    "build": "next build",
+    "start": "next start",
     "dev": "next dev",
     "lint": "next lint"
   },
