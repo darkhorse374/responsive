@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('/fonts/absans-regular.otf')
+}
+
+body {
+  font-family: 'MyCustomFont' !important;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animated-border {
+  animation: pulse-border 3s infinite;
+}
+
+/* Custom font sizes for the headings to match design */
+@layer utilities {
+  .text-uclic-heading {
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Marquee animation for infinite scrolling (right to left) */
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.33%);
+  }
+}
+
+/* Marquee animation for infinite scrolling (left to right) */
+@keyframes marquee-ltr {
+  0% {
+    transform: translateX(-33.33%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-content-rtl {
+  display: flex;
+  animation: marquee-rtl 60s linear infinite; /* Slower animation (60s instead of 30s) */
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-content-ltr {
+  display: flex;
+  animation: marquee-ltr 60s linear infinite; /* Slower animation (60s instead of 30s) */
+  width: max-content;
+  will-change: transform;
+}
+
+/* Pause animation on hover */
+.marquee-container:hover .marquee-content-rtl,
+.marquee-container:hover .marquee-content-ltr {
+  animation-play-state: paused;
+}
+
+/* Make service item interactive */
+.service-item {
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.service-item:hover {
+  transform: scale(1.05);
+}
+
+/* Service card hover effects */
+.service-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(126, 211, 33, 0.4) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+/* Hide minus icon by default in accordion */
+.accordion-minus {
+  display: none;
+}
+
+.naviBack {
+  background: linear-gradient(180deg, #000000 78.17%, rgba(0, 0, 0, 0) 100%);
+  height: 143px;
+  width: 100vw;
+}
+
+.headerbackgroundDesktop {
+  background: url(/Assets/Asset\ Images/Background\ header\ desktop.png);
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+
+.middlebackgroundDesktop {
+  background: url('/Assets/Asset\ Images/Rectangle.png'), linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 50%, #D9FF4B);
+  background-size: cover;
+  background-position: center;
+}
+
+.middlebackgroundDesktop1 {
+  background: url('/Assets/Asset\ Images/Rectangle.png'), linear-gradient(to bottom, #D9FF4B, rgba(0, 0, 0, 1));
+  background-size: cover;
+  background-position: center;
+}
+
+/* 
+.middlebackgroundDesktop {
+  position: relative;
+  background: url(/Assets/Asset\ Images/Rectangle.png) , linear-gradient(black, #CEF04C);
+  background-size: cover;
+  background-position: center;
+} */
+
+.middlebackgroundImage {
+  background: url('/Assets/Asset\ Images/Rectangle.png'), 
+              opeacity(to bottom, rgba(1, 1, 1, 0), rgba(1, 1, 1, 0.1) 50%, rgba(1, 1, 1, 0) 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+.middleCover {
+  position: relative;
+  background: linear-gradient(#D9FF4B, #CEF04C);
+  background-size: cover;
+  background-position: center;
+}
+
+.middleCover1 {
+  position: relative;
+  background: linear-gradient(#F1FBC7, #E4FB8C);
+  background-size: cover;
+  background-position: center;
+}
+
+.middlebackgroundImage {
+  background: url('/Assets/Asset\ Images/Rectangle.png'), 
+              opeacity(to bottom, rgba(1, 1, 1, 0), rgba(1, 1, 1, 0.1) 50%, rgba(1, 1, 1, 0) 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+.middleCover {
+  position: relative;
+  background: linear-gradient(#D9FF4B, #CEF04C);
+  background-size: cover;
+  background-position: center;
+}
